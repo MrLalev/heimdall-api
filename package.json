@@ -1,0 +1,35 @@
+{
+  "name": "heimdall-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "start": "nodemon --exec babel-node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MrLalev/heimdall-api.git"
+  },
+  "author": "Lachezar Lalev",
+  "license": "BSD-2-Clause",
+  "bugs": {
+    "url": "https://github.com/MrLalev/heimdall-api/issues"
+  },
+  "homepage": "https://github.com/MrLalev/heimdall-api#readme",
+  "devDependencies": {
+    "@types/dotenv": "^6.1.0",
+    "@types/graphql": "^14.0.7",
+    "@types/mongoose": "^5.3.20",
+    "babel-cli": "^6.26.0",
+    "babel-preset-latest": "^6.24.1",
+    "babel-preset-stage-2": "^6.24.1",
+    "dotenv": "^6.2.0",
+    "eslint": "^5.15.1",
+    "nodemon": "^1.18.10"
+  },
+  "dependencies": {
+    "apollo-server": "^2.4.8",
+    "graphql": "^14.1.1",
+    "mongoose": "^5.4.17"
+  }
+}
