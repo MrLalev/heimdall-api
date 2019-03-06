@@ -1,7 +1,7 @@
 import * as dotenv from "dotenv";
-import { ApolloServer, gql } from 'apollo-server';
+import { ApolloServer } from "apollo-server";
 import mongoose from "mongoose";
-import schema from "./schema";
+import schema from "./graph";
 import models from "./models";
 
 dotenv.config();
@@ -14,10 +14,14 @@ mongoose.connection.once('open', () => {
 
 const server = new ApolloServer({
     schema,
-    context: ({ req }) => ({
+    context: ({ req, res }) => ({
         // authScope: getScope(req.headers.authorization)
         db: { ...models },
-	}), 
+        secret: process.env.SECRET,
+        req,
+        res
+    }), 
+    cors: true,
 });
 
 server.listen(process.env.SERVER_PORT).then(({ url }) => {
