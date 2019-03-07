@@ -1,8 +1,10 @@
 import * as dotenv from "dotenv";
-import { ApolloServer } from "apollo-server";
+import { ApolloServer } from "apollo-server-express";
+import express from "express";
 import mongoose from "mongoose";
 import schema from "./graph";
 import models from "./models";
+import middleware from "./middleware";
 
 dotenv.config();
 mongoose.connect(process.env.DB_URL, { useNewUrlParser: true });
@@ -12,18 +14,21 @@ mongoose.connection.once('open', () => {
     console.log(error);
 });
 
+const app = express();
+app.use(middleware.authorizationMiddleware);
+
 const server = new ApolloServer({
     schema,
-    context: ({ req, res }) => ({
-        // authScope: getScope(req.headers.authorization)
-        db: { ...models },
+    context: ({ req }) => ({
+        models,
         secret: process.env.SECRET,
-        req,
-        res
+        user: req.user,
     }), 
     cors: true,
 });
 
-server.listen(process.env.SERVER_PORT).then(({ url }) => {
-  console.log(`Server ready at ${url}`);
-});
+server.applyMiddleware({app});
+
+app.listen({ port: process.env.SERVER_PORT }, () =>
+  console.log(`Server ready at http://localhost:${process.env.SERVER_PORT}${server.graphqlPath}`)
+)

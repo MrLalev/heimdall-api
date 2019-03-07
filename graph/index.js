@@ -13,7 +13,7 @@ const MutationType = new GraphQLObjectType({
     name: 'MutationType',
     fields: {
         createUser: usersSchema.createUser,
-        authorization: usersSchema.authorization
+        authorize: usersSchema.authorize
     }
 });
 

@@ -1,29 +1,27 @@
 import jwt from "jsonwebtoken";
 import auth from "../graph/auth";
+import models from "../models";
 
-export default async(resolver, parent, args, context, info) => {
-    const token = context.req.headers['x-token'];
+export default async(req, res, next) => {
+    const token = req.headers['x-token'];
     if (token) {
         try {
-            const { user } = await jwt.verify(token, context.secret);
-            context.user = user;
+            const { user } = await jwt.verify(token, process.env.SECRET);
+            req.user = user;
         } catch (error) {
-            const refreshToken = context.req.headers['x-refresh-token'];
+            const refreshToken = req.headers['x-refresh-token'];
             const newTokens = await auth.refreshTokens(
                 refreshToken,
-                context.db,
-                context.secret
+                models,
+                process.env.SECRET
             );
             if (newTokens.token && newTokens.refreshToken) {
-                context.res.set('Access-Control-Expose-Headers', 'x-token, x-refresh-token');
-                context.res.set('x-token', newTokens.token);
-                context.res.set('x-refresh-token', newTokens.refreshToken);
+                res.set('Access-Control-Expose-Headers', 'x-token, x-refresh-token');
+                res.set('x-token', newTokens.token);
+                res.set('x-refresh-token', newTokens.refreshToken);
             }
-            context.user = newTokens.user;
+            req.user = newTokens.user;
         }
-        const result = await resolver(parent, args, context, info);
-        return result; 
     } 
-
-    throw new Error("Unauthorized");
+    return next();
 }

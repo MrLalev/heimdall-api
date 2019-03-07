@@ -13,7 +13,7 @@ const createTokens = (user, secret) => {
     return Promise.all([createToken, createRefreshToken]);
 }
 
-const refreshTokens = async (refreshToken, db, secret) => {
+const refreshTokens = async (refreshToken, models, secret) => {
    let userId = null;
    try {
        const { user: { id } } = jwt.verify(refreshToken, secret);
@@ -22,7 +22,7 @@ const refreshTokens = async (refreshToken, db, secret) => {
        return {};
    }
 
-   const user = await db.UserModel.findOne({ _id: userId });
+   const user = await models.UserModel.findOne({ _id: userId });
    const [newToken, newRefreshToken] = await createTokens(user, secret);
 
    return {
