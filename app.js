@@ -2,6 +2,7 @@ import * as dotenv from "dotenv";
 import { ApolloServer } from "apollo-server-express";
 import express from "express";
 import mongoose from "mongoose";
+import cors from "cors";
 import schema from "./graph";
 import models from "./models";
 import middleware from "./middleware";
@@ -15,6 +16,7 @@ mongoose.connection.once('open', () => {
 });
 
 const app = express();
+app.use(cors("*"));
 app.use(middleware.authorizationMiddleware);
 
 const server = new ApolloServer({
@@ -23,8 +25,8 @@ const server = new ApolloServer({
         models,
         secret: process.env.SECRET,
         user: req.user,
-    }), 
-    cors: true,
+    })
+    // cors: true,
 });
 
 server.applyMiddleware({app});
