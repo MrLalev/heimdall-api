@@ -7,7 +7,10 @@ services:
             - '${DB_PORT}:27017'
         restart: always
         volumes:
-            - ./db-data:/data/db
+            - db-data:/data/db
+        # environment:
+        #     MONGO_INITDB_ROOT_USERNAME: ${DB_USER}
+        #     MONGO_INITDB_ROOT_PASSWORD: ${DB_PASSWORD}
     server: 
         container_name: server
         restart: always
@@ -18,3 +21,5 @@ services:
             - mongo
         volumes:
             - ./src:/usr/src/app/src
+volumes:
+    db-data:
