@@ -8,7 +8,10 @@ const getExercises = {
     args: {
         where: {
             type: GraphQLJSONObject,
-        }    
+        },
+        restrict: {
+            type: GraphQLJSONObject,
+        }
     },
     resolve: async(parent, args, context, info) => resolvers.exerciseResolvers.get(parent, args, context, info)
 };

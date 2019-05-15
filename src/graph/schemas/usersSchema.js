@@ -8,7 +8,10 @@ const getUsers = {
     args: {
         where: {
             type: GraphQLJSONObject,
-        }    
+        },
+        restrict: {
+            type: GraphQLJSONObject,
+        }
     },
     resolve: async(parent, args, context, info) => resolvers.userResolvers.get(parent, args, context, info)
 };
