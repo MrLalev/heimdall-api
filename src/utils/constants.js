@@ -1,8 +1,6 @@
 import ENUMS from './enums';
 
 const CREATE_USER_DEFAULT_DATA = {
-    personal_trainings: [],
-    shared_trainings: [],
     personal_data: {
         weight: null,
         gender: null,
@@ -12,7 +10,6 @@ const CREATE_USER_DEFAULT_DATA = {
         description: null,
         metric_type: ENUMS.METRIC_ENUM.METRIC,
     },
-    posts: [],
     followers: [],
     following: [],
 }

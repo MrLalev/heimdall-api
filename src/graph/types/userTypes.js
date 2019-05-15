@@ -1,4 +1,4 @@
-import { GraphQLObjectType,  GraphQLString, GraphQLFloat, GraphQLInputObjectType, GraphQLList } from "graphql";
+import { GraphQLObjectType, GraphQLInt,  GraphQLString, GraphQLFloat, GraphQLInputObjectType, GraphQLList } from "graphql";
 import ENUMS from './enumTypes';
 
 const UserPersonalDataType = new GraphQLObjectType({
@@ -44,22 +44,46 @@ const UserType = new GraphQLObjectType({
             type: GraphQLString
         },
         personal_trainings: {
-            type: new GraphQLList(GraphQLString)
+            type: new GraphQLList(GraphQLString),
+            resolve: async(parent, args, context) => {
+                // TODO: add proper resolver here
+                return [];
+            }
         },
         shared_trainings: {
-            type: new GraphQLList(GraphQLString)
+            type: new GraphQLList(GraphQLString),
+            resolve: async(parent, args, context) => {
+                // TODO: add proper resolver here
+                return [];
+            }
         },
         personal_data: {
             type: UserPersonalDataType
         },
         posts: {
-            type: new GraphQLList(GraphQLString)
+            type: new GraphQLList(GraphQLString),
+            resolve: async(parent, args, context) => {
+                // TODO: add proper resolver here
+                return [];
+            }
         },
         followers: {
             type: new GraphQLList(GraphQLString)
         },
+        followers_count: {
+            type: GraphQLInt,
+            resolve: async(parent, args, context) => {
+                return parent.followers.length;
+            }
+        },
         following: {
             type: new GraphQLList(GraphQLString)
+        },
+        following_count: {
+            type: GraphQLInt,
+            resolve: async(parent, args, context) => {
+                return parent.following.length;
+            }
         },
         activity_log: {
             type: new GraphQLList(GraphQLString),
