@@ -4,7 +4,7 @@ import ENUM_TYPES from './enumTypes';
 const ExerciseType = new GraphQLObjectType({
     name: 'ExerciseType',
     fields: () => ({
-        id: {
+        _id: {
             type: GraphQLString
         },
         private: {

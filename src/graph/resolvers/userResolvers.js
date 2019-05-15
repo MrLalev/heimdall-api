@@ -2,10 +2,10 @@ import bcrypt from "bcrypt";
 import auth from "../auth";
 import CONST from "../../utils/constants";
 import types from "../types";
-import { parseQueryFields } from "../../utils/helpers";
+import { parseQueryFields, parseFilterObject } from "../../utils/helpers";
 
 const get = async(parent, args, { models }, info) => {
-    return models.UserModel.find({}, parseQueryFields(info, types.userTypes.UserType));
+    return models.UserModel.find(parseFilterObject(args.where), parseQueryFields(info, types.userTypes.UserType));
 }
 
 const create = async(parent, { input }, { models }, info) => {

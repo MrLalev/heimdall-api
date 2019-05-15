@@ -31,7 +31,7 @@ const UserPersonalDataType = new GraphQLObjectType({
 const UserType = new GraphQLObjectType({
     name: 'UserType',
     fields: () => ({
-        id: {
+        _id: {
             type: GraphQLString
         },
         first_name: {

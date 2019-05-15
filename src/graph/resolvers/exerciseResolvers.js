@@ -1,8 +1,8 @@
 import types from "../types";
-import { parseQueryFields } from "../../utils/helpers";
+import { parseQueryFields, parseFilterObject } from "../../utils/helpers";
 
 const get = (parent, args, { models }, info) => {
-   return models.ExerciseModel.find({}, parseQueryFields(info, types.exerciseTypes.ExerciseType));
+   return models.ExerciseModel.find(parseFilterObject(args.where), parseQueryFields(info, types.exerciseTypes.ExerciseType));
 }
 
 const create = async(parent, { input }, { models }, info) => {

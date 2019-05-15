@@ -3,11 +3,11 @@ import _ from "lodash";
 
 const createTokens = (user, secret) => {
     const createToken =  jwt.sign({
-        user: _.pick(user, ['id', 'email', 'first_name', 'last_name'])
+        user: _.pick(user, ['_id', 'email', 'first_name', 'last_name'])
     }, secret, { expiresIn: '1m' });
 
     const createRefreshToken =  jwt.sign({
-        user: _.pick(user, ['id'])
+        user: _.pick(user, ['_id'])
     }, secret, { expiresIn: '7d' });
 
     return Promise.all([createToken, createRefreshToken]);
@@ -16,8 +16,8 @@ const createTokens = (user, secret) => {
 const refreshTokens = async (refreshToken, models, secret) => {
    let userId = null;
    try {
-       const { user: { id } } = jwt.verify(refreshToken, secret);
-       userId = id;
+       const { user: { _id } } = jwt.verify(refreshToken, secret);
+       userId = _id;
    } catch (error) {
        return {};
    }

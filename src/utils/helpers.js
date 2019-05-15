@@ -16,3 +16,11 @@ export const parseQueryFields = (resolveInfo, resolveType) => {
     Object.keys(fields).forEach(key => queryFields[key] = 1);
     return queryFields;
 }
+
+export const parseFilterObject = (filter) => {
+    if (filter) {
+        return filter;
+    }
+
+    return {};
+}

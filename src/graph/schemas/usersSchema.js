@@ -1,21 +1,17 @@
-import { GraphQLString, GraphQLList, GraphQLNonNull } from "graphql";
+import { GraphQLString, GraphQLList, GraphQLNonNull, Graphql } from "graphql";
+import { GraphQLJSONObject } from "graphql-type-json";
 import types from "../types";
 import resolvers from "../resolvers";
 
 const getUsers = { 
     type: new GraphQLList(types.userTypes.UserType),
+    args: {
+        where: {
+            type: GraphQLJSONObject,
+        }    
+    },
     resolve: async(parent, args, context, info) => resolvers.userResolvers.get(parent, args, context, info)
 };
-
-// const getUserById = { 
-//     type: types.userTypes.UserType,
-//     args: {
-//         id: {
-//             type: GraphQLString,
-//         }    
-//     },
-//     resolve: async(parent, args, context, info) => resolvers.userResolvers.getById(parent, args, context, info)
-// };
 
 const createUser = { 
     type: types.userTypes.UserType,
