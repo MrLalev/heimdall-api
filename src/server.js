@@ -25,6 +25,7 @@ const server = new ApolloServer({
         models,
         secret: process.env.SECRET,
         user: req.user,
+        req
     })
     // cors: true,
 });

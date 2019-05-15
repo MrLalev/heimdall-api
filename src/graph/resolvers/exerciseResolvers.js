@@ -1,8 +1,8 @@
-const get = (parent, args, { models }) => {
+const get = (parent, args, { models }, info) => {
     return models.ExerciseModel.find();
 }
 
-const create = async(parent, { input }, { models }) => {
+const create = async(parent, { input }, { models }, info) => {
     return models.ExerciseModel.create(input);
 }
 

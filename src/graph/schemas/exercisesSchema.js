@@ -4,7 +4,7 @@ import resolvers from "../resolvers";
 
 const getExercises = { 
     type: new GraphQLList(types.exerciseTypes.ExerciseType),
-    resolve: async(parent, args, context) => resolvers.exerciseResolvers.get(parent, args, context)
+    resolve: async(parent, args, context, info) => resolvers.exerciseResolvers.get(parent, args, context, info)
 };
 
 const createExercise = { 
@@ -14,7 +14,7 @@ const createExercise = {
             type: new GraphQLNonNull(types.exerciseTypes.ExerciseInputType),
         },
     },
-    resolve: async(parent, args, context) => resolvers.exerciseResolvers.create(parent, args, context)
+    resolve: async(parent, args, context, info) => resolvers.exerciseResolvers.create(parent, args, context, info)
 };
 
 export default {

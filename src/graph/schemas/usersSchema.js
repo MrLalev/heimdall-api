@@ -4,7 +4,7 @@ import resolvers from "../resolvers";
 
 const getAllUsers = { 
     type: new GraphQLList(types.userTypes.UserType),
-    resolve: async(parent, args, context) => resolvers.userResolvers.getAll(parent, args, context)
+    resolve: async(parent, args, context, info) => resolvers.userResolvers.getAll(parent, args, context, info)
 };
 
 const getUserById = { 
@@ -14,7 +14,7 @@ const getUserById = {
             type: GraphQLString,
         }    
     },
-    resolve: async(parent, args, context) => resolvers.userResolvers.getById(parent, args, context)
+    resolve: async(parent, args, context, info) => resolvers.userResolvers.getById(parent, args, context, info)
 };
 
 const createUser = { 
@@ -24,7 +24,7 @@ const createUser = {
             type: new GraphQLNonNull(types.userTypes.UserInputType),
         },
     },
-    resolve: async(parent, args, context) => resolvers.userResolvers.create(parent, args, context)
+    resolve: async(parent, args, context, info) => resolvers.userResolvers.create(parent, args, context, info)
 };
 
 const authorize = { 
@@ -34,7 +34,7 @@ const authorize = {
             type: new GraphQLNonNull(types.authTypes.AuthInputType),
         },
     },
-    resolve:  async(parent, args, context) => resolvers.userResolvers.authorize(parent, args, context)
+    resolve: async(parent, args, context, info) => resolvers.userResolvers.authorize(parent, args, context, info)
 };
 
 export default {
