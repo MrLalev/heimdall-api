@@ -4,7 +4,7 @@ import CONST from "../../utils/constants";
 import types from "../types";
 import { parseResolveInfo, simplifyParsedResolveInfoFragmentWithType } from 'graphql-parse-resolve-info';
 
-const getAll = async(parent, args, { models }, info) => {
+const get = async(parent, args, { models }, info) => {
     const parsedResolveInfoFragment = parseResolveInfo(info);
     const { fields } = simplifyParsedResolveInfoFragmentWithType(
                 parsedResolveInfoFragment,
@@ -13,10 +13,6 @@ const getAll = async(parent, args, { models }, info) => {
     const queryFields = {};
     Object.keys(fields).forEach(key => queryFields[key] = 1);
     return models.UserModel.find({}, queryFields);
-}
-
-const getById = async(parent, args, { models }, info) => {
-    return models.UserModel.findById(args.id);
 }
 
 const create = async(parent, { input }, { models }, info) => {
@@ -44,8 +40,7 @@ const authorize = async(parent, { input }, { models, secret }, info) => {
 }
 
 export default {
-    getAll,
-    getById,
+    get,
     create,
     authorize
 }

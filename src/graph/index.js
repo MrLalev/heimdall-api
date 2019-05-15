@@ -6,8 +6,7 @@ import serviceDataSchema from './schemas/serviceDataSchema';
 const QueryType = new GraphQLObjectType({
     name: 'QueryType',
     fields: {
-        getUserById: usersSchema.getUserById,
-        getAllUsers: usersSchema.getAllUsers,
+        getUsers: usersSchema.getUsers,
         getExercises: exercisesSchema.getExercises,
         getGenderList: serviceDataSchema.getGenderList,
         getMetricList: serviceDataSchema.getMetricList,
