@@ -1,5 +1,6 @@
 import bcrypt from "bcrypt";
 import auth from "../auth";
+import CONST from "../../utils/constants";
 
 const getAll = (parent, args, { models }) => {
     return models.UserModel.find();
@@ -10,8 +11,9 @@ const getById = async(parent, args, { models }) => {
 }
 
 const create = async(parent, { input }, { models }) => {
-    const user = input;
+    let user = input;
     user.password = await bcrypt.hash(user.password, 12);
+    user = { ...user, ...CONST.CREATE_USER_DEFAULT_DATA };
     return models.UserModel.create(user);
 }
 
