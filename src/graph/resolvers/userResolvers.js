@@ -2,17 +2,10 @@ import bcrypt from "bcrypt";
 import auth from "../auth";
 import CONST from "../../utils/constants";
 import types from "../types";
-import { parseResolveInfo, simplifyParsedResolveInfoFragmentWithType } from 'graphql-parse-resolve-info';
+import { parseQueryFields } from "../../utils/functions";
 
 const get = async(parent, args, { models }, info) => {
-    const parsedResolveInfoFragment = parseResolveInfo(info);
-    const { fields } = simplifyParsedResolveInfoFragmentWithType(
-                parsedResolveInfoFragment,
-                types.userTypes.UserType
-            );
-    const queryFields = {};
-    Object.keys(fields).forEach(key => queryFields[key] = 1);
-    return models.UserModel.find({}, queryFields);
+    return models.UserModel.find({}, parseQueryFields(info, types.userTypes.UserType));
 }
 
 const create = async(parent, { input }, { models }, info) => {
