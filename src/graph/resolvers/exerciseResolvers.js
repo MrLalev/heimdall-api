@@ -1,5 +1,5 @@
 import types from "../types";
-import { parseQueryFields } from "../../utils/functions";
+import { parseQueryFields } from "../../utils/helpers";
 
 const get = (parent, args, { models }, info) => {
    return models.ExerciseModel.find({}, parseQueryFields(info, types.exerciseTypes.ExerciseType));

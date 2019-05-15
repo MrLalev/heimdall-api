@@ -1,6 +1,6 @@
 import { GraphQLObjectType, GraphQLEnumType, GraphQLString, GraphQLList } from "graphql";
 import ENUMS from "../../utils/enums";
-import { graphEnumConverter } from "../../utils/functions";
+import { graphEnumConverter } from "../../utils/helpers";
 
 const GenderType = new GraphQLEnumType({
     name: 'GenderType',
