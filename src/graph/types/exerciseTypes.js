@@ -1,4 +1,5 @@
 import { GraphQLObjectType, GraphQLBoolean, GraphQLInt,  GraphQLString, GraphQLFloat, GraphQLInputObjectType, GraphQLList } from "graphql";
+import ENUM_TYPES from './enumTypes';
 
 const ExerciseType = new GraphQLObjectType({
     name: 'ExerciseType',
@@ -16,7 +17,7 @@ const ExerciseType = new GraphQLObjectType({
             type: GraphQLString
         },
         muscle_group: {
-            type: new GraphQLList(GraphQLString),
+            type: new GraphQLList(ENUM_TYPES.MuscleGroupType),
         },
         created_by: {
             type: GraphQLString
@@ -46,7 +47,7 @@ const ExerciseInputType = new GraphQLInputObjectType({
             type: GraphQLBoolean
         },
         muscle_group: {
-            type: new GraphQLList(GraphQLString),
+            type: new GraphQLList(ENUM_TYPES.MuscleGroupType),
         },
         created_by: {
             type: GraphQLString

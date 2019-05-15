@@ -1,6 +1,7 @@
 import { GraphQLObjectType, GraphQLSchema } from "graphql";
 import usersSchema from './schemas/usersSchema';
 import exercisesSchema from './schemas/exercisesSchema';
+import serviceDataSchema from './schemas/serviceDataSchema';
 
 const QueryType = new GraphQLObjectType({
     name: 'QueryType',
@@ -8,6 +9,9 @@ const QueryType = new GraphQLObjectType({
         getUserById: usersSchema.getUserById,
         getAllUsers: usersSchema.getAllUsers,
         getExercises: exercisesSchema.getExercises,
+        getGenderList: serviceDataSchema.getGenderList,
+        getMetricList: serviceDataSchema.getMetricList,
+        getMuscleGroupList: serviceDataSchema.getMuscleGroupList
     }
 });
 

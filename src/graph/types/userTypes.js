@@ -1,5 +1,5 @@
 import { GraphQLObjectType, GraphQLInt,  GraphQLString, GraphQLFloat, GraphQLInputObjectType, GraphQLList } from "graphql";
-import ENUMS from './enumTypes';
+import ENUM_TYPES from './enumTypes';
 
 const UserPersonalDataType = new GraphQLObjectType({
     name: 'UserPersonalDataType',
@@ -8,7 +8,7 @@ const UserPersonalDataType = new GraphQLObjectType({
             type: GraphQLFloat
         },
         gender: {
-            type: ENUMS.GenderType
+            type: ENUM_TYPES.GenderType
         },
         height: {
             type: GraphQLFloat
@@ -23,7 +23,7 @@ const UserPersonalDataType = new GraphQLObjectType({
             type: GraphQLString
         },
         metric_type: {
-            type: ENUMS.MetricType
+            type: ENUM_TYPES.MetricType
         },
     })
 });

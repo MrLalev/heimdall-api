@@ -4,8 +4,8 @@ const METRIC_ENUM = {
 }
 
 const GENDER_ENUM = {
-    M: 'M',
-    W: 'W'
+    M: 'MEN',
+    W: 'WOMEN'
 }
 
 const ACTIVITY_TYPE_ENUM = {
@@ -24,6 +24,7 @@ const MUSCLE_GROUP_TYPE_ENUM = {
     CHEST: 'CHEST',
     ARMS: 'ARMS',
     LEGS: 'LEGS',
+    ABS: 'ABS',
 }
 
 export default {
