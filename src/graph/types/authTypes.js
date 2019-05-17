@@ -1,4 +1,5 @@
 import { GraphQLObjectType, GraphQLString, GraphQLInputObjectType } from "graphql";
+import UserTypes from './userTypes';
 
 const AuthPayloadType = new GraphQLObjectType({
     name: 'AuthPayloadType',
@@ -9,6 +10,9 @@ const AuthPayloadType = new GraphQLObjectType({
         refreshToken: {
             type: GraphQLString
         },
+        user: {
+            type: UserTypes.UserType
+        }
     })
 });
 

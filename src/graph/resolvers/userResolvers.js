@@ -32,7 +32,8 @@ const authorize = async(parent, { input }, { models, secret }, info) => {
 
     return {
         token,
-        refreshToken
+        refreshToken,
+        user
     }
 }
 
