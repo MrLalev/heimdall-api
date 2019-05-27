@@ -1,10 +1,11 @@
 import mongoose, { Schema } from "mongoose";
+import uniqueValidator from "mongoose-unique-validator";
 
 const UserSchema = new Schema({
-    first_name: String,
-    last_name: String,
-    email: String,
-    password: String,
+    first_name: { type: Schema.Types.String, required: true },
+    last_name: { type: Schema.Types.String, required: true },
+    email: { type: Schema.Types.String, unique: true, required: true },
+    password: { type: Schema.Types.String, required: true },
     personal_data: {
         weight: Number,
         gender: String,
@@ -18,4 +19,4 @@ const UserSchema = new Schema({
     following: Array,
 } , { collation: { locale: 'en_US', strength: 2 }, timestamps: { createdAt: 'created_at', updatedAt: 'updated_at'} });
 
-export default mongoose.model('user', UserSchema);
+export default mongoose.model('user', UserSchema.plugin(uniqueValidator, { message: 'Error: user with {PATH} {VALUE} already exists.' }));

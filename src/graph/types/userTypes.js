@@ -1,4 +1,12 @@
-import { GraphQLObjectType, GraphQLInt,  GraphQLString, GraphQLFloat, GraphQLInputObjectType, GraphQLList } from "graphql";
+import { 
+    GraphQLObjectType,
+    GraphQLInt, 
+    GraphQLString,
+    GraphQLFloat,
+    GraphQLInputObjectType,
+    GraphQLList,
+    GraphQLNonNull
+} from "graphql";
 import ENUM_TYPES from './enumTypes';
 
 const UserPersonalDataType = new GraphQLObjectType({
@@ -105,16 +113,16 @@ const UserInputType = new GraphQLInputObjectType({
     name: 'UserInputType',
     fields: () => ({
         first_name: {
-            type: GraphQLString
+            type: new GraphQLNonNull(GraphQLString)
         },
         last_name: {
-            type: GraphQLString
+            type: new GraphQLNonNull(GraphQLString)
         },
         email: {
-            type: GraphQLString
+            type: new GraphQLNonNull(GraphQLString)
         },
         password: {
-            type: GraphQLString
+            type: new GraphQLNonNull(GraphQLString)
         }
     })
 });
