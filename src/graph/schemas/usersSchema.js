@@ -16,6 +16,19 @@ const getUsers = {
     resolve: async(parent, args, context, info) => resolvers.userResolvers.get(parent, args, context, info)
 };
 
+const refreshUsers = { 
+    type: new GraphQLList(types.userTypes.UserType),
+    args: {
+        where: {
+            type: GraphQLJSONObject,
+        },
+        restrict: {
+            type: GraphQLJSONObject,
+        }
+    },
+    resolve: async(parent, args, context, info) => resolvers.userResolvers.get(parent, args, context, info)
+};
+
 const createUser = { 
     type: types.userTypes.UserType,
     args: {
@@ -38,6 +51,7 @@ const authorize = {
 
 export default {
     getUsers,
+    refreshUsers,
     createUser,
     authorize
 };
