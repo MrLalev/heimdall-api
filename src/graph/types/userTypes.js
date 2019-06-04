@@ -81,7 +81,7 @@ const UserType = new GraphQLObjectType({
         followers_count: {
             type: GraphQLInt,
             resolve: async(parent, args, context) => {
-                return parent.followers.length;
+                return parent.followers ? parent.followers.length : 0;
             }
         },
         following: {
@@ -90,7 +90,7 @@ const UserType = new GraphQLObjectType({
         following_count: {
             type: GraphQLInt,
             resolve: async(parent, args, context) => {
-                return parent.following.length;
+                return parent.following ? parent.following.length : 0;
             }
         },
         activity_log: {

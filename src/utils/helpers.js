@@ -27,8 +27,6 @@ export const parseFilterObject = (filter) => {
 
 export const parseRestrictFields = (restrict) => {
     if (restrict) {
-        // TODO: add logic for items per page and page number
-        // which will add value to limit and skip props
         return restrict;
     }
 
