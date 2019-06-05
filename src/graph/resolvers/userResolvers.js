@@ -4,9 +4,10 @@ import CONST from "../../utils/constants";
 import types from "../types";
 import { parseQueryFields, parseFilterObject, parseRestrictFields } from "../../utils/helpers";
 
-const get = async(parent, args, { models }, info) => {
+const get = async(parent, args, { models, user }, info) => {
+    const where = { $and: [{ ...args.where}, { _id: { $ne: user._id }}]};
     return models.UserModel.find(
-        parseFilterObject(args.where),
+        parseFilterObject(where),
         parseQueryFields(info, types.userTypes.UserType),
         parseRestrictFields(args.restrict)
     );
@@ -21,11 +22,11 @@ const create = async(parent, { input }, { models }, info) => {
 
 const authorize = async(parent, { input }, { models, secret }, info) => {
     const { email, password } = input;
-    const user = await models.UserModel.findOne({ email });
+    const user = await models.UserModel.findOne({ email }, { _id: 1, email: 1, first_name: 1, last_name: 1, password: 1 });
     const valid = user ? await bcrypt.compare(password, user.password) : false;
 
     if (!valid) {
-        throw new Error('Wrong email or password');
+        throw new Error('Error: Wrong email or password');
     }
 
     const [token, refreshToken] = await auth.createTokens(user, secret);

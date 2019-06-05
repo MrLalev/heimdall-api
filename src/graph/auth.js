@@ -4,11 +4,11 @@ import _ from "lodash";
 const createTokens = (user, secret) => {
     const createToken =  jwt.sign({
         user: _.pick(user, ['_id', 'email', 'first_name', 'last_name'])
-    }, secret, { expiresIn: '1m' });
+    }, secret, { expiresIn: '3d' });
 
     const createRefreshToken =  jwt.sign({
         user: _.pick(user, ['_id'])
-    }, secret, { expiresIn: '7d' });
+    }, secret, { expiresIn: '15d' });
 
     return Promise.all([createToken, createRefreshToken]);
 }
@@ -22,7 +22,7 @@ const refreshTokens = async (refreshToken, models, secret) => {
        return {};
    }
 
-   const user = await models.UserModel.findOne({ _id: userId });
+   const user = await models.UserModel.findOne({ _id: userId }, { _id: 1, email: 1, first_name: 1, last_name: 1 });
    const [newToken, newRefreshToken] = await createTokens(user, secret);
 
    return {
