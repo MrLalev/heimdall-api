@@ -5,9 +5,9 @@ import types from "../types";
 import { parseQueryFields, parseFilterObject, parseRestrictFields } from "../../utils/helpers";
 
 const get = async(parent, args, { models, user }, info) => {
-    const where = { $and: [{ ...args.where}, { _id: { $ne: user._id }}]};
+    // const where = { $and: [{ ...args.where}, { _id: { $ne: user._id }}]};
     return models.UserModel.find(
-        parseFilterObject(where),
+        parseFilterObject(args.where),
         parseQueryFields(info, types.userTypes.UserType),
         parseRestrictFields(args.restrict)
     );
