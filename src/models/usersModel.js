@@ -17,6 +17,8 @@ const UserSchema = new Schema({
     },
     followers: Array,
     following: Array,
+    scheduled_trainings: Array,
+    goals: Array,
 } , { collation: { locale: 'en_US', strength: 2 }, timestamps: { createdAt: 'created_at', updatedAt: 'updated_at'} });
 
 export default mongoose.model('user', UserSchema.plugin(uniqueValidator, { message: 'Error: user with {PATH} {VALUE} already exists.' }));

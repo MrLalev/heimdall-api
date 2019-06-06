@@ -87,6 +87,12 @@ const UserType = new GraphQLObjectType({
         following: {
             type: new GraphQLList(GraphQLString)
         },
+        scheduled_trainings:  {
+            type: new GraphQLList(GraphQLString)
+        },
+        goals:  {
+            type: new GraphQLList(GraphQLString)
+        },
         following_count: {
             type: GraphQLInt,
             resolve: async(parent, args, context) => {
