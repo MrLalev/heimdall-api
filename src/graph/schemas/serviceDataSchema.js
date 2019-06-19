@@ -1,6 +1,13 @@
 import types from "../types";
 import ENUMS from "../../utils/enums";
 
+const getSetsTypeList = { 
+    type: types.enumTypes.SetsOutputType,
+    resolve: async(parent, args, context, info) => {
+        return Object.values(ENUMS.SETS_ENUM)
+    }
+};
+
 const getGenderList = { 
     type: types.enumTypes.GenderOutputType,
     resolve: async(parent, args, context, info) => {
@@ -25,5 +32,6 @@ const getMuscleGroupList = {
 export default {
     getGenderList,
     getMetricList,
-    getMuscleGroupList
+    getMuscleGroupList,
+    getSetsTypeList,
 };

@@ -2,6 +2,11 @@ import { GraphQLObjectType, GraphQLEnumType, GraphQLString, GraphQLList } from "
 import ENUMS from "../../utils/enums";
 import { graphEnumConverter } from "../../utils/helpers";
 
+const SetsType = new GraphQLEnumType({
+    name: 'SetsType',
+    values: graphEnumConverter(ENUMS.SETS_ENUM)
+});
+
 const GenderType = new GraphQLEnumType({
     name: 'GenderType',
     values: graphEnumConverter(ENUMS.GENDER_ENUM)
@@ -15,6 +20,15 @@ const MetricType = new GraphQLEnumType({
 const MuscleGroupType = new GraphQLEnumType({
     name: 'MuscleGroupType',
     values: graphEnumConverter(ENUMS.MUSCLE_GROUP_TYPE_ENUM)
+});
+
+const SetsOutputType = new GraphQLObjectType({
+    name: 'SetsOutputType',
+    fields: () => ({
+        values: {
+            type: new GraphQLList(GraphQLString),
+        },
+    })
 });
 
 const GenderOutputType = new GraphQLObjectType({
@@ -51,5 +65,7 @@ export default {
     GenderOutputType,
     MetricOutputType,
     MuscleGroupOutputType,
-    MuscleGroupType
+    MuscleGroupType,
+    SetsType,
+    SetsOutputType,
 }

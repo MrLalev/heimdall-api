@@ -27,9 +27,14 @@ const MUSCLE_GROUP_TYPE_ENUM = {
     ABS: 'ABS',
 }
 
+const SETS_ENUM = {
+    NORMAL: "NORMAL"
+}
+
 export default {
     METRIC_ENUM,
     GENDER_ENUM,
     MUSCLE_GROUP_TYPE_ENUM,
     ACTIVITY_TYPE_ENUM,
+    SETS_ENUM
 }
