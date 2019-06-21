@@ -59,12 +59,16 @@ const TrainingType = new GraphQLObjectType({
         exercises: {
             type: new GraphQLList(TrainingExerciseType),
             resolve: async(parent, args, context) => {
-                const where = { $or: parent.exercises.map(e => { return { _id: e.exercise } }) };
-                const exercises = await context.models.ExerciseModel.find(where);
-                return parent.exercises.map(e => {
-                    e.exercise = exercises.find(x => x._id.toString() === e.exercise);
-                    return e;
-                });
+                if (parent.exercises.length > 0) {
+                    const where = { $or: parent.exercises.map(e => { return { _id: e.exercise } }) };
+                    const exercises = await context.models.ExerciseModel.find(where);
+                    return parent.exercises.map(e => {
+                        e.exercise = exercises.find(x => x._id.toString() === e.exercise);
+                        return e;
+                    });
+                } else {
+                    return [];
+                }
             }
         },
         shared_with: {
